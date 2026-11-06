@@ -1,0 +1,31 @@
+{
+  "version": "v1",
+  "status": "draft",
+  "files": [
+    {
+      "path": "client-output.docx",
+      "opened": false,
+      "rendered_pages": [],
+      "all_pages_reviewed": false
+    }
+  ],
+  "issues": [
+    {
+      "id": "Q01",
+      "severity": "P1",
+      "state": "open",
+      "evidence": ""
+    }
+  ],
+  "facts_verified": false,
+  "scope_consistent": false,
+  "commercial_terms_verified": false,
+  "requirements_covered": false,
+  "metadata_reviewed": false,
+  "approval": {
+    "by": "",
+    "date": "",
+    "version": "",
+    "evidence": ""
+  }
+}
