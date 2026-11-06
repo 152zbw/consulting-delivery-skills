@@ -27,5 +27,13 @@
     "date": "",
     "version": "",
     "evidence": ""
-  }
+  },
+  "review_checks": [
+    {
+      "criterion": "scope",
+      "verdict": "not-assessed",
+      "version": "v1",
+      "evidence": "尚缺本次范围确认材料"
+    }
+  ]
 }

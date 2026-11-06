@@ -9,7 +9,7 @@ class ReleaseChecks(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup);self.p=Path(self.tmp.name)
         (self.p/'client.md').write_text('项目范围：两个部门。交付：诊断说明与责任矩阵。',encoding='utf-8')
-        self.m={'version':'v2','status':'client-release','files':[{'path':'client.md','opened':True}],'issues':[],
+        self.m={'version':'v2','status':'client-release','files':[{'path':'client.md','opened':True}],'issues':[],'review_checks':[{'criterion':'scope','verdict':'pass','version':'v2','evidence':'虚构范围核对记录'}],
                 'approval':{'by':'虚构业务负责人','date':'2026-11-06','version':'v2','evidence':'虚构测试确认记录'},
                 **{x:True for x in ('facts_verified','scope_consistent','commercial_terms_verified','requirements_covered','metadata_reviewed')}}
     def run_check(self):
@@ -38,6 +38,12 @@ class ReleaseChecks(unittest.TestCase):
         (self.p/'client.md').write_text('待确认',encoding='utf-8');self.assertEqual(self.run_check(),[])
     def test_missing_business_verification_blocks(self):
         self.m['commercial_terms_verified']=False;self.assertTrue(self.run_check())
+    def test_not_assessed_cannot_release(self):
+        self.m['review_checks'][0]['verdict']='not-assessed';self.assertTrue(self.run_check())
+    def test_review_version_cannot_be_stale(self):
+        self.m['review_checks'][0]['version']='v1';self.assertTrue(self.run_check())
+    def test_review_pass_needs_evidence(self):
+        self.m['review_checks'][0]['evidence']='';self.assertTrue(self.run_check())
     def test_all_copies_equal(self):
         copies=[p.read_bytes() for p in (ROOT/'skills').glob('*/scripts/check_delivery.py')]
         self.assertEqual(len(copies),4);self.assertTrue(all(c==copies[0] for c in copies))

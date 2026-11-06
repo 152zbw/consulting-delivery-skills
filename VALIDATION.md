@@ -30,3 +30,9 @@
 新增章节标准、示例反例、方法选择、多角色审查、客户交付关口和交付记录检查脚本。2026-11-06运行 tests/test_delivery_check.py，11项测试通过，覆盖缺文件、严重问题未关闭、关闭缺证据、批准版本不符、残留占位、伪Office、缺视觉记录及草稿保留缺口。四份独立脚本一致。
 
 已进行同一AI的四类虚构场景局部生成试跑，产出与审查记录见 tests/replays/RESULTS.md。不是独立盲测，未完成真实客户Office文件生成与全页渲染，未通过真人业务验收；不得把脚本通过或这些局部片段当作可直接交客户的保证。
+
+## 公开同类 Skill 研究补充验证（2026-11-06）
+
+已实际查看Proposal Builder、Proposal Writing、Proposal Skills的methodology与review、Instructional Design、Skill Creator及此前Codex PPT资料。来源、许可标识差异和取舍见RESEARCH.md。本次为流程思想研究后的独立中文实现，没有安装运行外部项目，没有复制其代码、正文、图像资产或地区法律模板。
+
+新增8个结构化行为用例，状态全部为not_run，未声称完成模型对照试验。专业审查新增四态与版本检查，运行tests/test_delivery_check.py共14项通过。所有技能仍需依本次实际输入生成文件和完成全页审查，不保证每次可直接对外定稿。

@@ -43,3 +43,5 @@ python3 scripts/check_delivery.py /absolute/path/delivery-manifest.json
 ```
 
 manifest格式与最小示例见 [manifest-example.json](manifest-example.json)。路径以manifest目录为基准，交付清单必须填写本次实际文件。脚本失败应修复原因而不是修改检查结果来通过。
+
+manifest的review_checks逐项记录criterion、verdict（pass/fail/not-assessed/not-applicable）、version和evidence。未评估记录原因；定稿不得有fail/not-assessed，旧版本审查不能放行新稿。证据字段仅记录引用，脚本不确认其真实有效性。

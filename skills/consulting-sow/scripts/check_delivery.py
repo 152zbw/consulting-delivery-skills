@@ -55,6 +55,15 @@ def check(manifest):
         if q.get('state') not in ('open','fixed-unverified','closed','not-applicable'): errors.append(f'issues[{i}] unknown state')
         if q.get('state') in ('closed','not-applicable') and not str(q.get('evidence','')).strip(): errors.append(f'issues[{i}] missing closure evidence')
         if final and q.get('state') not in ('closed','not-applicable'): errors.append(f'issues[{i}] unresolved issue')
+    checks=m.get('review_checks',[])
+    if not isinstance(checks,list): errors.append('review_checks must be a list');checks=[]
+    for i,c in enumerate(checks):
+        if not isinstance(c,dict): errors.append(f'review_checks[{i}] must be an object');continue
+        if c.get('verdict') not in ('pass','fail','not-assessed','not-applicable'): errors.append(f'review_checks[{i}] unknown verdict')
+        if not isinstance(c.get('evidence'),str) or not c['evidence'].strip(): errors.append(f'review_checks[{i}] missing evidence or reason')
+        if final and c.get('verdict') not in ('pass','not-applicable'): errors.append(f'review_checks[{i}] incomplete review')
+        if final and c.get('version')!=m.get('version'): errors.append(f'review_checks[{i}] stale review version')
+    if final and not checks: errors.append('No professional review checks recorded')
     if final:
         for field in ('facts_verified','scope_consistent','commercial_terms_verified','requirements_covered','metadata_reviewed'):
             if m.get(field) is not True: errors.append('Release evidence missing: '+field)
