@@ -1,0 +1,4 @@
+interface:
+  display_name: "方案建议书"
+  short_description: "按公司模板形成可追溯的咨询交付初稿，核对边界与证据并模拟客户审查"
+  default_prompt: "请使用 $consulting-proposal，根据我提供的公司模板和项目资料完成方案建议书，列出资料缺口并完成专项审查。"
